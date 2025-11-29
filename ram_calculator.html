@@ -3,44 +3,68 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Cálculo NS - MTs / CL</title>
+  <title>Calculadora NS — MTs / CL (Responsiva)</title>
   <link rel="stylesheet" href="ram_calculator.css">
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
 <body>
-  <div class="card" role="main" aria-labelledby="title">
-    <h1 id="title">Calculadora NS (resultado em ns)</h1>
-
-    <label for="mts">MTs (número)</label>
-    <input id="mts" type="number" step="any" min="0" value="10">
-
-    <label for="cl">CL (número)</label>
-    <input id="cl" type="number" step="any" min="0" value="1">
-
-    <div class="row">
-      <button id="calcBtn" class="btn primary">Calcular</button>
-      <button id="resetBtn" class="btn">Limpar</button>
+  <header class="topbar">
+    <h1>Calculadora NS</h1>
+    <div class="controls-header">
+      <label class="switch">
+        <input id="themeToggle" type="checkbox" />
+        <span class="slider-switch" aria-hidden="true"></span>
+      </label>
+      <span class="small">Tema escuro</span>
     </div>
+  </header>
 
-    <div id="result" class="result muted">
-      Insira MTs e CL e clique em Calcular
-    </div>
+  <main class="container">
+    <section class="card inputs">
+      <div class="field">
+        <label for="mtsNum">MTs</label>
+        <div class="row-inputs">
+          <input id="mtsNum" type="number" step="any" min="0" value="10" />
+          <input id="mtsRange" type="range" min="0.1" max="100" step="0.1" value="10" />
+        </div>
+      </div>
 
-    <div class="note">
-      Fórmula usada: <code>(1 / (MTs / 2) * CL) * 1000</code> → resultado em <strong>ns</strong>.
-    </div>
+      <div class="field">
+        <label for="clNum">CL</label>
+        <div class="row-inputs">
+          <input id="clNum" type="number" step="any" min="0" value="1" />
+          <input id="clRange" type="range" min="0" max="100" step="0.1" value="1" />
+        </div>
+      </div>
 
-    <div class="muted legend">
-      <span class="badge c-purple">0 – 5: Excelente</span>
-      <span class="badge c-blue">5 – 10: Ótimo</span>
-      <span class="badge c-green">10 – 11: Ideal</span>
-      <span class="badge c-yellow">11 – 12: Aceitável</span>
-      <span class="badge c-orange">13 – 14: Lento</span>
-      <span class="badge c-red1">14 – 15</span>
-      <span class="badge c-red2">15 – 16</span>
-      <span class="badge c-red3">16 – 17</span>
-      <span class="badge c-black">≥ 17: Inaceitável</span>
-    </div>
-  </div>
+      <div class="actions">
+        <button id="calcBtn" class="btn primary">Calcular</button>
+        <button id="clearHistBtn" class="btn">Limpar histórico</button>
+      </div>
+
+      <div id="result" class="result" aria-live="polite">
+        <div class="value">— ns</div>
+        <div class="label small">Insira MTs e CL</div>
+      </div>
+
+      <div class="legend small">
+        <strong>Fórmula:</strong> <code>(1 / (MTs / 2)) * CL * 1000</code> — resultado em <strong>ns</strong>.
+      </div>
+    </section>
+
+    <section class="card chartcard">
+      <div class="chart-header">
+        <h2>Histórico (últimos valores)</h2>
+        <div class="chart-legend small">Atualize para ver o ponto no gráfico</div>
+      </div>
+      <canvas id="nsChart" width="400" height="240" aria-label="Gráfico de ns ao longo do tempo"></canvas>
+    </section>
+  </main>
+
+  <footer class="footer small">
+    Faixas (visual contínuo): púrpura → azul → verde → amarelo → laranja → vermelho → preto (inaceitável ≥ 17).
+  </footer>
 
   <script src="ram_calculator.js"></script>
 </body>
