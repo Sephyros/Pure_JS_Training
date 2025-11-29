@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cálculo NS - MTs / CL</title>
+  <link rel="stylesheet" href="ram_calculator.css">
+</head>
+<body>
+  <div class="card" role="main" aria-labelledby="title">
+    <h1 id="title">Calculadora NS (resultado em ns)</h1>
+
+    <label for="mts">MTs (número)</label>
+    <input id="mts" type="number" step="any" min="0" value="10">
+
+    <label for="cl">CL (número)</label>
+    <input id="cl" type="number" step="any" min="0" value="1">
+
+    <div class="row">
+      <button id="calcBtn" class="btn primary">Calcular</button>
+      <button id="resetBtn" class="btn">Limpar</button>
+    </div>
+
+    <div id="result" class="result muted">
+      Insira MTs e CL e clique em Calcular
+    </div>
+
+    <div class="note">
+      Fórmula usada: <code>(1 / (MTs / 2) * CL) * 1000</code> → resultado em <strong>ns</strong>.
+    </div>
+
+    <div class="muted legend">
+      <span class="badge c-purple">0 – 5: Excelente</span>
+      <span class="badge c-blue">5 – 10: Ótimo</span>
+      <span class="badge c-green">10 – 11: Ideal</span>
+      <span class="badge c-yellow">11 – 12: Aceitável</span>
+      <span class="badge c-orange">13 – 14: Lento</span>
+      <span class="badge c-red1">14 – 15</span>
+      <span class="badge c-red2">15 – 16</span>
+      <span class="badge c-red3">16 – 17</span>
+      <span class="badge c-black">≥ 17: Inaceitável</span>
+    </div>
+  </div>
+
+  <script src="ram_calculator.js"></script>
+</body>
+</html>
